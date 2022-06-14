@@ -1,0 +1,99 @@
+$mainColor: rgba(227, 255, 67, 0.938);
+$secondColor: rgba(255, 170, 72, 0.938);
+$thirdColor: rgba(253, 255, 221, 0.938);
+$mainWordColor: rgba(97, 109, 31, 0.938);
+$secondWordColor: rgba(124, 75, 102, 0.938);
+
+.container {
+    background-color: $thirdColor;
+    border-radius: 15px;
+    width: 350px;
+    margin: 20px auto;
+    hr{
+        border-color: $mainColor;
+        width: 90%;
+        margin: 20px auto 10px;
+    }
+    .displayArea {
+        font-size: 24px;
+        font-weight: 550;
+        padding: 30px;
+        #inputBox {
+            text-align: right;
+        }
+
+        #resultBox {
+            text-align: right;
+        }
+    }
+
+    .otherArea {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 35px;
+        i{
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .fa-clock{
+            color: $mainWordColor;
+        }
+        .fa-backspace{
+            color: $secondColor;
+        }
+    }
+
+    .buttonArea {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .buttonSmallArea {
+            display: flex;
+
+            .circle {
+                border: none;
+                display: block;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                background-color: $mainColor;
+                border-radius: 100%;
+                padding: 30px;
+                margin: 10px;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 550;
+                    position: absolute;
+                    top: 48%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .clear {
+                    color: rgb(255, 119, 56);
+                }
+
+                .symbol {
+                    color: $secondWordColor;
+                }
+
+                .number {
+                    color: $mainWordColor;
+                }
+            }
+
+            #settlement {
+                background-color: $secondColor;
+
+                span {
+                    color: #FFF;
+                }
+            }
+        }
+    }
+}
