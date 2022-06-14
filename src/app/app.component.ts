@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 
 
 
@@ -9,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'calculatorDemo';
+  result = 0;
+  @ViewChild("input") input:any;
   clearAll(){
 
   }
@@ -18,7 +20,9 @@ export class AppComponent {
   addSymbol(symbol:any){
     console.log(symbol);
   }
-  addNumber(number:number){
+  addNumber(number:number):void{
     console.log(number);
+    this.input.nativeElement.innerText = number;
+    console.log(this.input.nativeElement.innerText);
   }
 }
