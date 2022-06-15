@@ -1,6 +1,7 @@
 $mainColor: rgba(227, 255, 67, 0.938);
 $secondColor: rgba(255, 170, 72, 0.938);
 $thirdColor: rgba(253, 255, 221, 0.938);
+$fourthColor: rgba(246, 250, 199, 0.938);
 $mainWordColor: rgba(97, 109, 31, 0.938);
 $secondWordColor: rgba(124, 75, 102, 0.938);
 
@@ -9,21 +10,45 @@ $secondWordColor: rgba(124, 75, 102, 0.938);
     border-radius: 15px;
     width: 350px;
     margin: 20px auto;
-    hr{
+
+    hr {
         border-color: $mainColor;
         width: 90%;
         margin: 20px auto 10px;
     }
+
     .displayArea {
-        font-size: 24px;
-        font-weight: 550;
-        padding: 30px;
+        padding: 20px 30px;
+
+        #inputNumber {
+            display: none;
+        }
+
         #inputBox {
+            width: 100%;
+            border: none;
+            background-color: rgba(124, 75, 102, 0);
             text-align: right;
+            font-size: 30px;
+            font-weight: 550;
+
+            &:focus {
+                outline: none;
+            }
         }
 
         #resultBox {
+            width: 100%;
+            border: none;
+            background-color: rgba(124, 75, 102, 0);
             text-align: right;
+            font-size: 30px;
+            font-weight: 600;
+            color: $mainWordColor;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
 
@@ -31,17 +56,68 @@ $secondWordColor: rgba(124, 75, 102, 0.938);
         display: flex;
         justify-content: space-between;
         margin: 0 35px;
-        i{
-            cursor: pointer;
+
+        i {
+
             font-size: 18px;
         }
-        .fa-clock{
-            color: $mainWordColor;
+
+        i,
+        span {
+            cursor: pointer;
         }
-        .fa-backspace{
+
+        .bounceArea {
+            color: $mainWordColor;
+            display: flex;
+            z-index: 1;
+
+            i {
+                margin-right: 30px;
+            }
+
+            span {
+                font-size: 17px;
+            }
+
+            .bounceAreaDiv {
+                position: relative;
+            }
+
+
+            .recordDiv {
+                position: absolute;
+                background-color: $fourthColor;
+                border-radius: 50px;
+                padding: 20px;
+                display: none;
+            }
+
+            .otherSymbolDiv {
+                position: absolute;
+                background-color: $fourthColor;
+                border-radius: 15px;
+                padding: 20px;
+                left: -60px;
+                display: none;
+                span{
+                    margin: 10px;
+                }
+            }
+
+            .memoryDiv {
+                position: absolute;
+                background-color: $fourthColor;
+                padding: 20px;
+                display: none;
+            }
+        }
+
+        .fa-backspace {
             color: $secondColor;
         }
     }
+
 
     .buttonArea {
         width: 100%;
@@ -49,6 +125,7 @@ $secondWordColor: rgba(124, 75, 102, 0.938);
         display: flex;
         flex-direction: column;
         align-items: center;
+
         .buttonSmallArea {
             display: flex;
 

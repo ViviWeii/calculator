@@ -1,12 +1,34 @@
 <div class="container">
   <div class="displayArea">
-    <p id="inputBox" #input>{{result}}</p>
+    <input type="text" id="inputNumber" value="{{num}}">
+    <input type="text" id="inputBox" value="{{inputBox}}" disabled>
     <br>
-    <p id="resultBox"></p>
+    <input id="resultBox" value="{{result == 0 ? '' : result}}" disabled >
   </div>
   <div class="otherArea">
-    <i class="far fa-clock"></i>
-    <i class="fas fa-backspace"></i>
+    <div class="bounceArea">
+      <div class="bounceAreaDiv">
+        <i class="far fa-clock" (click) = "bounceClick('recordDiv')"></i>
+        <div class="recordDiv">
+          歷史紀錄
+        </div>
+      </div>
+      <div class="bounceAreaDiv">
+        <i class="fas fa-calculator" (click) = "bounceClick('otherSymbolDiv')"></i>
+        <div class="otherSymbolDiv">
+          <span>x<sup>2</sup></span>
+          <span>√</span>
+          <span>log</span>
+        </div>
+      </div>
+      <div class="bounceAreaDiv">
+        <span class="memory" (click) = "bounceClick('memoryDiv')">MS</span>
+        <div class="memoryDiv">
+          MC
+        </div>
+      </div>
+    </div>
+    <i class="fas fa-backspace" (click) = "backspace()"></i>
   </div>
   <hr>
   <div class="buttonArea">
@@ -14,7 +36,7 @@
       <button class="circle" (click)="clearAll()">
         <span class="clear">Ｃ</span>
       </button>
-      <button class="circle" (click)="addBrackets()">
+      <button class="circle">
         <span class="symbol">（）</span>
       </button>
       <button class="circle" (click)="addSymbol('%')">
@@ -25,13 +47,13 @@
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle" (click)="addNumber(7)">
+      <button class="circle" (click)="addNumber('7')">
         <span class="number">７</span>
       </button>
-      <button class="circle" (click)="addNumber(8)">
+      <button class="circle" (click)="addNumber('8')">
         <span class="number">８</span>
       </button>
-      <button class="circle" (click)="addNumber(9)">
+      <button class="circle" (click)="addNumber('9')">
         <span class="number">９</span>
       </button>
       <button class="circle" (click)="addSymbol('*')">
@@ -39,13 +61,13 @@
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle" (click)="addNumber(4)">
+      <button class="circle" (click)="addNumber('4')">
         <span class="number">４</span>
       </button>
-      <button class="circle" (click)="addNumber(5)">
+      <button class="circle" (click)="addNumber('5')">
         <span class="number">５</span>
       </button>
-      <button class="circle" (click)="addNumber(6)">
+      <button class="circle" (click)="addNumber('6')">
         <span class="number">６</span>
       </button>
       <button class="circle" (click)="addSymbol('-')">
@@ -53,13 +75,13 @@
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle" (click)="addNumber(1)">
+      <button class="circle" (click)="addNumber('1')">
         <span class="number">１</span>
       </button>
-      <button class="circle" (click)="addNumber(2)">
+      <button class="circle" (click)="addNumber('2')">
         <span class="number">２</span>
       </button>
-      <button class="circle" (click)="addNumber(3)">
+      <button class="circle" (click)="addNumber('3')">
         <span class="number">３</span>
       </button>
       <button class="circle" (click)="addSymbol('+')">
@@ -70,13 +92,13 @@
       <button class="circle">
         <span class="symbol">+/-</span>
       </button>
-      <button class="circle" (click)="addNumber(0)">
+      <button class="circle" (click)="addNumber('0')">
         <span class="number">０</span>
       </button>
       <button class="circle" (click)="addSymbol('.')">
         <span class="symbol">．</span>
       </button>
-      <button id="settlement" class="circle">
+      <button id="settlement" class="circle" (click)="settlement()">
         <span>＝</span>
       </button>
     </div>
