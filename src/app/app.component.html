@@ -1,106 +1,141 @@
 <div class="container">
-  <div class="displayArea">
-    <input type="text" id="inputNumber" value="{{num}}">
-    <input type="text" id="inputBox" value="{{inputBox}}" disabled>
-    <br>
-    <input id="resultBox" value="{{result == 0 ? '' : result}}" disabled >
+  <div class="bounceArea">
+    <div class="bounceAreaDiv">
+      <i class="far fa-clock"></i>
+      <div class="recordDiv"></div>
+    </div>
   </div>
-  <div class="otherArea">
-    <div class="bounceArea">
-      <div class="bounceAreaDiv">
-        <i class="far fa-clock" (click) = "bounceClick('recordDiv')"></i>
-        <div class="recordDiv">
-          歷史紀錄
-        </div>
-      </div>
-      <div class="bounceAreaDiv">
-        <i class="fas fa-calculator" (click) = "bounceClick('otherSymbolDiv')"></i>
-        <div class="otherSymbolDiv">
-          <span>x<sup>2</sup></span>
-          <span>√</span>
-          <span>log</span>
-        </div>
-      </div>
-      <div class="bounceAreaDiv">
-        <span class="memory" (click) = "bounceClick('memoryDiv')">MS</span>
-        <div class="memoryDiv">
-          MC
+  <!-- 算式區 start -->
+  <div class="displayArea">
+    <div class="formulaArea">
+      <span>{{ storeNum }}</span>
+      <span
+        >{{
+          currentOperator == "*" || currentOperator == "/"
+            ? ""
+            : currentOperator
+        }}{{ currentOperator == "*" ? "×" : ""
+        }}{{ currentOperator == "/" ? "÷" : "" }}</span
+      >
+      <span>{{ currentNum }}</span>
+    </div>
+    <br />
+    <div class="resultArea">
+      <input id="resultBox" [value]="resultNum" disabled />
+    </div>
+  </div>
+  <!-- 算式區 end -->
+  <!-- 先加減區 start -->
+  <div class="memoryArea">
+    <span class="presetOff">MC</span>
+    <span class="presetOff">MR</span>
+    <span class="presetOff">M+</span>
+    <span class="presetOff">M-</span>
+    <span class="presetOn">MS</span>
+    <span class="presetOff">M▾</span>
+  </div>
+  <div class="memoryWindows">
+    <div class="memoryOutsiteArea">
+      <div class="memorySmallArea">
+        <span></span>
+        <div class="memoryBtnArea">
+          <button>MC</button>
+          <button>M+</button>
+          <button>M-</button>
         </div>
       </div>
     </div>
-    <i class="fas fa-backspace" (click) = "backspace()"></i>
+    <div class="memoryTrashArea">
+      <i class="fas fa-trash-alt"></i>
+    </div>
   </div>
-  <hr>
+  <!-- 先加減區 end -->
+  <!-- 按鈕區 start -->
   <div class="buttonArea">
     <div class="buttonSmallArea">
-      <button class="circle" (click)="clearAll()">
-        <span class="clear">Ｃ</span>
-      </button>
-      <button class="circle">
-        <span class="symbol">（）</span>
-      </button>
-      <button class="circle" (click)="addSymbol('%')">
+      <button class="operatorArea" (click)="percentOrSquareBtn('%')">
         <span class="symbol">％</span>
       </button>
-      <button class="circle" (click)="addSymbol('/')">
+      <button class="operatorArea" (click)="resetCurrentNumBtn()">
+        <span class="clear">CE</span>
+      </button>
+      <button class="operatorArea" (click)="resetBtn()">
+        <span class="clear">Ｃ</span>
+      </button>
+      <button class="operatorArea" (click)="backspace()">
+        <i class="fas fa-backspace"></i>
+      </button>
+    </div>
+    <div class="buttonSmallArea">
+      <button class="operatorArea">
+        <span class="symbol">x<sup>2</sup></span>
+      </button>
+      <button class="operatorArea">
+        <span class="symbol">√</span>
+      </button>
+      <button class="operatorArea">
+        <span class="symbol">log</span>
+      </button>
+      <button class="operatorArea" (click)="operatorBtn('/')">
         <span class="symbol">÷</span>
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle" (click)="addNumber('7')">
+      <button class="numberArea" (click)="inputNum('7')">
         <span class="number">７</span>
       </button>
-      <button class="circle" (click)="addNumber('8')">
+      <button class="numberArea" (click)="inputNum('8')">
         <span class="number">８</span>
       </button>
-      <button class="circle" (click)="addNumber('9')">
+      <button class="numberArea" (click)="inputNum('9')">
         <span class="number">９</span>
       </button>
-      <button class="circle" (click)="addSymbol('*')">
+      <button class="operatorArea" (click)="operatorBtn('*')">
         <span class="symbol">×</span>
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle" (click)="addNumber('4')">
+      <button class="numberArea" (click)="inputNum('4')">
         <span class="number">４</span>
       </button>
-      <button class="circle" (click)="addNumber('5')">
+      <button class="numberArea" (click)="inputNum('5')">
         <span class="number">５</span>
       </button>
-      <button class="circle" (click)="addNumber('6')">
+      <button class="numberArea" (click)="inputNum('6')">
         <span class="number">６</span>
       </button>
-      <button class="circle" (click)="addSymbol('-')">
+      <button class="operatorArea" (click)="operatorBtn('-')">
         <span class="symbol">－</span>
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle" (click)="addNumber('1')">
+      <button class="numberArea" (click)="inputNum('1')">
         <span class="number">１</span>
       </button>
-      <button class="circle" (click)="addNumber('2')">
+      <button class="numberArea" (click)="inputNum('2')">
         <span class="number">２</span>
       </button>
-      <button class="circle" (click)="addNumber('3')">
+      <button class="numberArea" (click)="inputNum('3')">
         <span class="number">３</span>
       </button>
-      <button class="circle" (click)="addSymbol('+')">
+      <button class="operatorArea" (click)="operatorBtn('+')">
         <span class="symbol">＋</span>
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="circle">
+      <button class="numberArea" (click)="changePositiveOrNegative()">
         <span class="symbol">+/-</span>
       </button>
-      <button class="circle" (click)="addNumber('0')">
+      <button class="numberArea" (click)="inputNum('0')">
         <span class="number">０</span>
       </button>
-      <button class="circle" (click)="addSymbol('.')">
+      <button class="numberArea" (click)="inputNum('.')">
         <span class="symbol">．</span>
       </button>
-      <button id="settlement" class="circle" (click)="settlement()">
+      <button id="settlement" class="numberArea" (click)="equalBtn()">
         <span>＝</span>
       </button>
     </div>
   </div>
+  <!-- 按鈕區 start -->
 </div>
