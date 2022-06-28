@@ -1,10 +1,50 @@
 <div class="container">
-  <div class="bounceArea">
-    <div class="bounceAreaDiv">
-      <i class="far fa-clock"></i>
-      <div class="recordDiv"></div>
+  <!-- 歷史紀錄按鈕 start -->
+  <div class="historyArea">
+    <i class="far fa-clock" (click)="openHistoryWindows()"></i>
+  </div>
+  <!-- 歷史紀錄按鈕 end -->
+  <!-- 歷史紀錄視窗 start -->
+  <div
+    [style.display]="isOpenHistoryWindows ? 'block' : 'none'"
+    class="historyWindows"
+  >
+    <div class="historyOutsiteArea">
+      <div
+        class="historySmallArea"
+        *ngFor="let i of historyInput"
+        (click)="
+          changeHistoryFormulaBtn(
+            i.storeNum,
+            i.currentOperator,
+            i.currentNum,
+            i.resultNum
+          )
+        "
+      >
+        <div class="formulaDiv">
+          <span>{{ i.storeNum }}</span>
+          <span
+            >{{
+              i.currentOperator == "*" ||
+              i.currentOperator == "/"
+                ? ""
+                : i.currentOperator
+            }}{{ i.currentOperator == "*" ? "×" : ""
+            }}{{ i.currentOperator == "/" ? "÷" : "" }}</span
+          >
+          <span>{{ i.currentNum }}</span>
+        </div>
+        <div class="resultDiv">
+          <p>{{ i.resultNum }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="historyTrashArea">
+      <i class="fas fa-trash-alt" (click)="deleteHistoryNumBtn()"></i>
     </div>
   </div>
+  <!-- 歷史紀錄視窗 end -->
   <!-- 算式區 start -->
   <div class="displayArea">
     <div class="formulaArea">
@@ -19,37 +59,74 @@
       >
       <span>{{ currentNum }}</span>
     </div>
-    <br />
     <div class="resultArea">
       <input id="resultBox" [value]="resultNum" disabled />
     </div>
   </div>
   <!-- 算式區 end -->
-  <!-- 先加減區 start -->
+  <!-- 先乘除後加減區 start -->
+  <!-- 記憶體按鈕 start -->
   <div class="memoryArea">
-    <span class="presetOff">MC</span>
-    <span class="presetOff">MR</span>
-    <span class="presetOff">M+</span>
-    <span class="presetOff">M-</span>
-    <span class="presetOn">MS</span>
-    <span class="presetOff">M▾</span>
+    <span
+      [ngClass]="isMemoryOn ? 'presetOn' : 'presetOff'"
+      (click)="isMemoryOn ? memoryClearBtn() : ''"
+      >MC</span
+    >
+    <span
+      [ngClass]="isMemoryOn ? 'presetOn' : 'presetOff'"
+      (click)="isMemoryOn ? memoryRecallBtn() : ''"
+      >MR</span
+    >
+    <span
+      [ngClass]="isMemoryOn ? 'presetOn' : 'presetOff'"
+      (click)="isMemoryOn ? memoryBtn('M+') : ''"
+      >M+</span
+    >
+    <span
+      [ngClass]="isMemoryOn ? 'presetOn' : 'presetOff'"
+      (click)="isMemoryOn ? memoryBtn('M-') : ''"
+      >M-</span
+    >
+    <span class="presetOn" (click)="memorySaveNumBtn()">MS</span>
+    <span
+      [ngClass]="isMemoryOn ? 'presetOn' : 'presetOff'"
+      (click)="isMemoryOn ? openMemoryWindows() : ''"
+      >M▾</span
+    >
   </div>
-  <div class="memoryWindows">
+  <!-- 記憶體按鈕 end -->
+  <!-- 記憶體視窗 start -->
+  <div
+    [style.display]="isOpenMemoryWindows ? 'block' : 'none'"
+    class="memoryWindows"
+  >
     <div class="memoryOutsiteArea">
-      <div class="memorySmallArea">
-        <span></span>
+      <div
+        class="memorySmallArea"
+        *ngFor="let i of memoryNums; let idx = index"
+      >
+        <span (click)="changeResultNumBtn(i.number)">{{
+          i.number
+        }}</span>
         <div class="memoryBtnArea">
-          <button>MC</button>
-          <button>M+</button>
-          <button>M-</button>
+          <button (click)="memorySeveralBtn(idx, i.number, 'MC')">
+            MC
+          </button>
+          <button (click)="memorySeveralBtn(idx, i.number, 'M+')">
+            M+
+          </button>
+          <button (click)="memorySeveralBtn(idx, i.number, 'M-')">
+            M-
+          </button>
         </div>
       </div>
     </div>
     <div class="memoryTrashArea">
-      <i class="fas fa-trash-alt"></i>
+      <i class="fas fa-trash-alt" (click)="deleteMemoryNumBtn()"></i>
     </div>
   </div>
-  <!-- 先加減區 end -->
+  <!-- 記憶體視窗 end -->
+  <!-- 先乘除後加減區 end -->
   <!-- 按鈕區 start -->
   <div class="buttonArea">
     <div class="buttonSmallArea">
@@ -67,13 +144,13 @@
       </button>
     </div>
     <div class="buttonSmallArea">
-      <button class="operatorArea">
+      <button class="operatorArea" (click)="percentOrSquareBtn('x^2')">
         <span class="symbol">x<sup>2</sup></span>
       </button>
-      <button class="operatorArea">
+      <button class="operatorArea" (click)="percentOrSquareBtn('√')">
         <span class="symbol">√</span>
       </button>
-      <button class="operatorArea">
+      <button class="operatorArea" (click)="operatorBtn('log')">
         <span class="symbol">log</span>
       </button>
       <button class="operatorArea" (click)="operatorBtn('/')">
