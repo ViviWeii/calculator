@@ -1,7 +1,7 @@
-$mainColor: rgba(227, 255, 67);
-$secondColor: rgba(255, 170, 72);
-$thirdColor: rgba(253, 255, 221);
-$fourthColor: rgba(250, 255, 200);
+$mainColor: rgb(196, 219, 66);
+$secondColor: rgb(250, 187, 50);
+$thirdColor: rgb(253, 255, 231);
+$fourthColor: rgb(253, 255, 219);
 $mainWordColor: rgba(97, 109, 31);
 $secondWordColor: rgba(124, 75, 102);
 $thirdWordColor: rgba(183, 190, 140);
@@ -24,7 +24,7 @@ $thirdWordColor: rgba(183, 190, 140);
 
 // 捲軸滑過時把手的顏色
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(243, 151, 46);
+    background: rgb(240, 173, 29);
 }
 
 .container {
@@ -92,7 +92,7 @@ $thirdWordColor: rgba(183, 190, 140);
                 }
 
                 &:hover {
-                    background-color: rgba(209, 240, 36);
+                    background-color: rgb(186, 209, 52);
                 }
             }
         }
@@ -168,7 +168,7 @@ $thirdWordColor: rgba(183, 190, 140);
 
             &:hover {
                 transition: all 0.3ss;
-                background-color: rgba(251, 255, 199, 0.938);
+                background-color: rgb(253, 255, 211);
             }
         }
 
@@ -211,7 +211,7 @@ $thirdWordColor: rgba(183, 190, 140);
                 }
 
                 &:hover {
-                    background-color: rgba(209, 240, 36);
+                    background-color: rgb(186, 209, 52);
                 }
 
                 .memoryBtnArea {
@@ -227,7 +227,7 @@ $thirdWordColor: rgba(183, 190, 140);
                         margin: 2px;
 
                         &:hover {
-                            background-color: rgba(209, 240, 36);
+                            background-color: rgb(186, 209, 52);
                             border: 1px solid #fff;
                         }
                     }
@@ -281,7 +281,7 @@ $thirdWordColor: rgba(183, 190, 140);
 
                 &:hover {
                     transition: all 0.3s;
-                    background-color: rgba(247, 255, 174, 0.938);
+                    background-color: rgb(249, 255, 197);
                 }
 
                 span {
@@ -326,7 +326,7 @@ $thirdWordColor: rgba(183, 190, 140);
 
                 &:hover {
                     transition: all 0.3s;
-                    background-color: rgba(209, 240, 36);
+                    background-color: rgb(186, 209, 52);
                 }
 
                 span {
@@ -353,7 +353,7 @@ $thirdWordColor: rgba(183, 190, 140);
 
                 &:hover {
                     transition: all 0.3s;
-                    background-color: rgba(243, 151, 46);
+                    background-color: rgb(240, 173, 29);
                 }
 
                 span {
